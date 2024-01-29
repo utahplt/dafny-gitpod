@@ -6,7 +6,7 @@ FROM ubuntu:jammy
 USER root
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install sudo git curl git bash-completion python3 python3-pip mono-complete -y && apt-get clean
+RUN apt-get update && apt-get install sudo git curl wget git bash-completion python3 python3-pip mono-complete -y && apt-get clean
 
 RUN pip3 install requests
 

@@ -22,6 +22,10 @@
 2. TODO run example
 3. 
 
+clear all squigglies
+F5 to run
+
+
 
 Write code in VSCode like normal.
 
