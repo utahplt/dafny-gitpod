@@ -12,6 +12,16 @@
 
 ## Usage
 
+1. Install Dafny from VSIX
+    * Click the `Extensions` button on the left panel of VSCode. Look for the
+      icon with 4 squares.
+    * Click the `...` of the extensions tab that just appeared.
+    * Choose `Install from VSIX`
+    * Use the path `/workspace/dafny-gitpod/ide-vscode-3.2.2.vsix`
+2. TODO run example
+3. 
+
+
 Write code in VSCode like normal.
 
 Run code from the terminal:

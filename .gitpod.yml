@@ -1,7 +1,3 @@
 image:
   file: .docker/gitpod/Dockerfile
 
-vscode:
-  extensions:
-    - dafny-lang.ide-vscode
-

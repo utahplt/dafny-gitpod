@@ -1,4 +1,5 @@
 # Based on the Dockerfile for `leanprovercommunity/mathlib:gitpod`
+# with Dafny help from https://github.com/arranstewart-dev/dafny-gitpod
 
 FROM ubuntu:jammy
 
@@ -25,6 +26,21 @@ ENV VSCODE_API_VERSION="1.50.0"
 
 # ssh to github once to bypass the unknown fingerprint warning
 RUN ssh -o StrictHostKeyChecking=no github.com || true
+
+# install dotnet
+RUN \
+ wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+ && sudo apt install $PWD/packages-microsoft-prod.deb \
+ && rm packages-microsoft-prod.deb \
+ && sudo apt-get update \
+ && sudo apt-get install -y apt-transport-https \
+ && sudo apt-get update \
+ && sudo apt-get install -y dotnet-sdk-6.0 \
+ && apt-get clean \
+ && rm -rf /var/cache/apt/* \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm -rf /tmp/* \
+ && rm -rf /var/tmp/*
 
 # run sudo once to suppress usage info
 RUN sudo echo finished
