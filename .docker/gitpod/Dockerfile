@@ -19,8 +19,6 @@ SHELL ["/bin/bash", "-c"]
 # gitpod bash prompt
 RUN { echo && echo "PS1='\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\]\$(__git_ps1 \" (%s)\") $ '" ; } >> .bashrc
 
-ENV PATH="/home/gitpod/.local/bin"
-
 # fix the infoview when the container is used on gitpod:
 ENV VSCODE_API_VERSION="1.50.0"
 
