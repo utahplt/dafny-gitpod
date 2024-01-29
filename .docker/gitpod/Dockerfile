@@ -1,10 +1,11 @@
-# Based on the Dockerfile for `leanprovercommunity/mathlib:gitpod`.
+# Based on the Dockerfile for `leanprovercommunity/mathlib:gitpod`
+# with Dafny help from https://github.com/arranstewart-dev/dafny-gitpod
 
 FROM ubuntu:jammy
 
 USER root
 
-RUN apt-get update && apt-get install sudo git curl git bash-completion python3 python3-pip -y && apt-get clean
+RUN apt-get update && apt-get install sudo git curl git bash-completion python3 python3-pip mono-complete -y && apt-get clean
 
 RUN pip3 install requests
 
@@ -25,5 +26,32 @@ ENV VSCODE_API_VERSION="1.50.0"
 # ssh to github once to bypass the unknown fingerprint warning
 RUN ssh -o StrictHostKeyChecking=no github.com || true
 
+ARG DAFNY_VERSION=3.5.0
+ARG DAFNY_ZIP=dafny-${DAFNY_VERSION}-x64-ubuntu-16.04.zip
+
+RUN \
+  cd /tmp \
+  && wget https://github.com/dafny-lang/dafny/releases/download/v${DAFNY_VERSION}/${DAFNY_ZIP} \
+  && unzip -d /opt/ ${DAFNY_ZIP} \
+  && chmod -R +r /opt/dafny
+
+# install dotnet
+RUN \
+ wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+ && sudo apt install $PWD/packages-microsoft-prod.deb \
+ && rm packages-microsoft-prod.deb \
+ && sudo apt-get update \
+ && sudo apt-get install -y apt-transport-https \
+ && sudo apt-get update \
+ && sudo apt-get install -y dotnet-sdk-6.0 \
+ && apt-get clean \
+ && rm -rf /var/cache/apt/* \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm -rf /tmp/* \
+ && rm -rf /var/tmp/*
+
+ENV PATH /opt/dafny:/opt/dafny/z3/bin:${PATH}
+
 # run sudo once to suppress usage info
 RUN sudo echo finished
+
