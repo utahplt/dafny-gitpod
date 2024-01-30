@@ -28,19 +28,9 @@ ENV VSCODE_API_VERSION="1.50.0"
 RUN ssh -o StrictHostKeyChecking=no github.com || true
 
 # install dotnet
-RUN \
- wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
- && sudo apt install $PWD/packages-microsoft-prod.deb \
- && rm packages-microsoft-prod.deb \
- && sudo apt-get update \
- && sudo apt-get install -y apt-transport-https \
- && sudo apt-get update \
- && sudo apt-get install -y dotnet-sdk-6.0 \
- && apt-get clean \
- && rm -rf /var/cache/apt/* \
- && rm -rf /var/lib/apt/lists/* \
- && rm -rf /tmp/* \
- && rm -rf /var/tmp/*
+RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+RUN apt-get install $PWD/packages-microsoft-prod.deb
+RUN apt-get install -y apt-transport-https dotnet-sdk-6.0 && apt-get clean
 
 # run sudo once to suppress usage info
 RUN sudo echo finished
