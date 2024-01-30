@@ -12,26 +12,13 @@
 
 ## Usage
 
-1. Install Dafny from VSIX
-    * Click the `Extensions` button on the left panel of VSCode. Look for the
-      icon with 4 squares.
-      <img alt="./img/vscode-extensions-icon.png" src="./img/vscode-extensions-icon.png" height="20px">
-    * Click the `...` of the extensions tab that just appeared.
-    * Choose `Install from VSIX`
-    * Use the path `/workspace/dafny-gitpod/ide-vscode-3.2.2.vsix`
-2. TODO run example
-3. 
+1. Install Dafny from VSIX.
+    * Right-click `ide-vscode-3.2.2.vsix` then `Install Extension VSIX`
+2. Exit the workspace and reopen it from <https://gitpod.io>
+    * _(There must be an easier way to reboot and get Dafny running, but I haven't found it!)
+3. Open an example file. Verification should succeed. Edit the invariants to make it fail.
+    * Examples: `Abs.dfy`, `LinearSearch.dfy`
+    * You may need to accept a VSCode popup (bottom-right) about using Dafny 4.4
 
-clear all squigglies
-F5 to run
-
-
-
-Write code in VSCode like normal.
-
-Run code from the terminal:
-
-```
-TBD
-```
+Dafny verifies on the fly as you edit code.
 
