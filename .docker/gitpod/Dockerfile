@@ -25,12 +25,12 @@ RUN { echo && echo "PS1='\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[0
 ENV VSCODE_API_VERSION="1.50.0"
 
 # ssh to github once to bypass the unknown fingerprint warning
-RUN ssh -o StrictHostKeyChecking=no github.com || true
+RUN sudo ssh -o StrictHostKeyChecking=no github.com || true
 
 # install dotnet
-RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+RUN sudo wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 RUN sudo apt-get install $PWD/packages-microsoft-prod.deb
-RUN sudo apt-get install -y apt-transport-https dotnet-sdk-6.0 && apt-get clean
+RUN sudo apt-get install -y apt-transport-https dotnet-sdk-6.0 && sudo apt-get clean
 
 # run sudo once to suppress usage info
 RUN sudo echo finished
