@@ -29,8 +29,8 @@ RUN ssh -o StrictHostKeyChecking=no github.com || true
 
 # install dotnet
 RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-RUN apt-get install $PWD/packages-microsoft-prod.deb
-RUN apt-get install -y apt-transport-https dotnet-sdk-6.0 && apt-get clean
+RUN sudo apt-get install $PWD/packages-microsoft-prod.deb
+RUN sudo apt-get install -y apt-transport-https dotnet-sdk-6.0 && apt-get clean
 
 # run sudo once to suppress usage info
 RUN sudo echo finished
